@@ -20,6 +20,7 @@
 - ✅ RWD（≤760px 面板改底部抽屜，375px 無橫向捲動）、`prefers-reduced-motion`
 - ✅ PWA（`manifest.json`＋`service-worker.js` network-first＋`icons/` PIL 自畫）；改 js／json 記得把 `CACHE_NAME` 版號 +1
 - ✅ 訪客計數器（visitor-badge `page_id=m255525.worldeconomyglobe`，面板底部）
+- ✅ GitHub Pages（2026-10-29 上線）：公開 repo <https://github.com/M255525/world-economy-globe>，網址 <https://m255525.github.io/world-economy-globe/>，`master`＋`.github/workflows/deploy-pages.yml`；程式牆與 github-dashboard 的 REPO_META 已登記
 - ❌ 序號授權（不需要）
 
 ## Port／測試
