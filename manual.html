@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>世界經濟地圖說明</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#14213d;--ink2:#45536e;--paper:#fff;--bg:#eaf3fc;--line:#d6e0ed;--accent:#ff7a2f}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ink:#e9eefb;--ink2:#c0cbe2;--paper:#0e1d3a;--bg:#050b1a;--line:#26375c}}
+:root[data-theme="dark"]{--ink:#e9eefb;--ink2:#c0cbe2;--paper:#0e1d3a;--bg:#050b1a;--line:#26375c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans TC',system-ui,sans-serif;line-height:1.8}
+main{max-width:820px;margin:0 auto;padding:24px 16px 48px}
+h1{font-size:28px;margin:0 0 4px;font-weight:900}
+h2{font-size:20px;margin:6px 0 8px;border-left:6px solid var(--accent);padding-left:10px}
+section{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:12px 18px 14px;margin-top:14px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td,th{border-bottom:1px solid var(--line);padding:6px 4px;text-align:left;vertical-align:top}
+th{white-space:nowrap}
+a{color:var(--accent)}
+p,li{color:var(--ink2)}
+</style>
+</head>
+<body>
+<main>
+<h1>世界經濟 3D 地圖・使用說明</h1>
+<p><a href="index.html">← 回到 3D 地圖</a></p>
+
+<section>
+<h2>這是什麼</h2>
+<p>一顆可以轉動的 3D 地球：每個國家依你選的經濟指標上色，首都位置長出一根立體柱（越高代表數值越大），再用金色弧線畫出主要貿易夥伴。收錄 61 個主要經濟體（約占全球 GDP 九成），可以比較 2015、2020、2024 三個年度，幫助你用「看地圖」的方式理解世界經濟的大小、貧富、成長與貿易關係。</p>
+</section>
+
+<section>
+<h2>基本操作</h2>
+<ol>
+<li><b>選指標</b>：上方八個按鈕，GDP、人均 GDP、經濟成長率、人口、通膨率、出口額、出口依存度、失業率。左下圖例會說明這個指標的意思與分級顏色。</li>
+<li><b>選年份</b>：點 2015／2020／2024，或拖曳年份軸線；按 ▶ 會自動輪播三個年度，看柱子長高或縮短。鍵盤 ← → 也能切換。</li>
+<li><b>轉動與縮放</b>：滑鼠拖曳轉動地球、滾輪縮放；手機用單指轉動、雙指縮放。⟲ 重設視角。</li>
+<li><b>地球／平面</b>：「🗺 平面」會把地球攤開成世界地圖，適合一眼比較全世界；「🌍 地球」適合看單一區域。</li>
+<li><b>區域篩選</b>：只看亞太、歐洲、北美等，其他國家會變淡，排行榜也只列該區域。</li>
+<li><b>點國家</b>：點地圖上的國家、立體柱、標籤或排行榜任一列，右側（手機為下方）會顯示國家卡：目前指標的數值與全球排名、三年度變化、一句白話解說、八項指標總覽、和台灣比較、主要貿易夥伴。再點夥伴可以跳過去。</li>
+<li><b>🧭 看懂導覽</b>：六個主題故事自動帶你看：誰是最大經濟體、亞洲崛起、總量與人均的差別、2020 疫情衝擊、通膨潮、台灣與貿易。</li>
+</ol>
+</section>
+
+<section>
+<h2>八個指標怎麼看</h2>
+<table>
+<tr><th>GDP</th><td>一年生產的商品與服務總值，代表經濟「體型」。</td></tr>
+<tr><th>人均 GDP</th><td>GDP ÷ 人口，粗略代表平均生活水準；未考慮各國物價差異與貧富分配。</td></tr>
+<tr><th>經濟成長率</th><td>扣除物價後比前一年多生產多少 %；負數＝衰退。</td></tr>
+<tr><th>人口</th><td>市場與勞動力的大小。</td></tr>
+<tr><th>通膨率</th><td>消費者物價一年漲幅；多數央行以 2% 左右為目標。</td></tr>
+<tr><th>出口額</th><td>一年賣到國外的商品與服務總值。</td></tr>
+<tr><th>出口依存度</th><td>出口 ÷ GDP；越高越依賴國際貿易，轉口貿易中心會超過 100%。</td></tr>
+<tr><th>失業率</th><td>想工作卻找不到工作的人占勞動力比例；各國統計口徑不同。</td></tr>
+</table>
+</section>
+
+<section>
+<h2>⚙ 常用設定</h2>
+<p>右上「⚙ 常用設定」可以調整，改了立即生效並記在這台裝置的瀏覽器：</p>
+<ul>
+<li><b>預設指標、預設年份、預設檢視</b>：下次打開直接顯示你最常看的畫面。</li>
+<li><b>自動旋轉＋速度</b>：閒置 4 秒後地球會慢慢轉；選了國家時會停住方便閱讀。</li>
+<li><b>貿易弧線</b>：沒選國家時是否顯示全球主要貿易走廊。</li>
+<li><b>標籤數量、長條高度、高度刻度</b>：「平方根」讓小國的柱子也看得到，「線性」如實呈現差距（美國會高得非常誇張）。</li>
+<li><b>金額幣別</b>：美元或新台幣（依當年平均匯率換算）。</li>
+<li><b>外觀</b>：跟隨系統、亮色、暗色（太空背景＋星空）。</li>
+<li><b>減少動畫</b>：關閉旋轉、粒子流動與鏡頭飛行。</li>
+</ul>
+</section>
+
+<section>
+<h2>資料來源與注意事項</h2>
+<ul>
+<li>數值為依國際貨幣基金（IMF）《世界經濟展望》、世界銀行等公開資料整理的<b>近似參考值</b>，四捨五入且各國口徑不一（例如印度、孟加拉採會計年度；失業率定義各國不同），<b>不是即時官方數據</b>，正式報告或投資決策請查原始資料。</li>
+<li>貿易夥伴為一般性的前三大貿易對象，會隨年份變動；弧線只表示關係，粗細不代表金額。</li>
+<li>國界使用 Natural Earth／world-atlas 1:110m 簡化地圖，僅供示意；新加坡、香港在此比例尺沒有輪廓，以立體柱表示。地圖上的國界與名稱不代表任何政治立場。</li>
+<li>3D 地圖需要網路下載繪圖元件與支援 WebGL 的瀏覽器；載入失敗時排行榜與國家資料仍可使用。設定只存在你的瀏覽器，不會上傳。</li>
+<li>僅供教學、課程及個人使用，禁止未經授權公開發布、販售或商業化使用。</li>
+</ul>
+</section>
+
+<section id="creator">
+<h2>創作者</h2>
+<p><b>Mark Tsai（蔡豐全）</b>：勞動力發展署創業顧問（2017 起）、經濟部 SBIR 海選專案評審委員（2019－2024），長期擔任小型企業人力提升計畫顧問與多項政府計畫業師、評審委員；專長銷售數據分析、AI 工具運用、政府補助計畫申請、創業與跨境電商。聯絡：<a href="mailto:tsaimark@gmail.com">tsaimark@gmail.com</a></p>
+</section>
+</main>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "世界經濟 3D 地圖",
+  "short_name": "世界經濟地圖",
+  "description": "用 3D 地球與平面地圖看懂各國 GDP、人均所得、成長率、通膨、出口與失業率。",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0d1b36",
+  "theme_color": "#0d1b36",
+  "lang": "zh-TW",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
