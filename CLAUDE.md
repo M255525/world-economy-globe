@@ -16,7 +16,8 @@
 ## 配套
 - ✅ 頂部跑馬燈（共用 Apps Script 端點、滑鼠移入暫停、`worldEconMarquee`）
 - ✅ ⚙ 常用設定（localStorage `worldEconPrefs`）：預設指標／年份／檢視、自動旋轉＋速度、貿易弧線、標籤數量、長條高度、高度刻度（平方根／線性）、幣別（美元／新台幣依當年匯率）、外觀（系統／亮／暗）、減少動畫、恢復預設
-- ✅ manual.html、警語、創作者資訊、RWD（≤760px 面板改底部抽屜，375px 無橫向捲動）、`prefers-reduced-motion`
+- ✅ 標準五件套（使用者 2026-10-29 指定為每個工具的常規配備）：📖 操作手冊 `manual.html`、⚠ 使用警語＋👤 創作者資訊（「ℹ 關於」彈窗 `#about`，**首次造訪自動跳出**，看過記 `worldEconWarnSeen`）、📲 加入主畫面、訪客計數器——頂列、面板底部、⚙ 常用設定底部「關於本工具」三處都有入口
+- ✅ RWD（≤760px 面板改底部抽屜，375px 無橫向捲動）、`prefers-reduced-motion`
 - ✅ PWA（`manifest.json`＋`service-worker.js` network-first＋`icons/` PIL 自畫）；改 js／json 記得把 `CACHE_NAME` 版號 +1
 - ✅ 訪客計數器（visitor-badge `page_id=m255525.worldeconomyglobe`，面板底部）
 - ❌ 序號授權（不需要）

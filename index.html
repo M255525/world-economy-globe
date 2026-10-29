@@ -194,6 +194,9 @@ body.has-marquee{--mq:30px}
 .sfoot{display:flex;gap:8px;margin-top:12px;align-items:center}
 .sfoot .msg{margin-right:auto;font-size:12.5px;color:var(--ok)}
 
+.warn{margin:0;padding-left:20px;font-size:13.5px;line-height:1.7;color:var(--ink2)}
+.warn li{margin-bottom:4px}
+.creator-box{margin-top:12px;border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:13.5px;line-height:1.7;color:var(--ink2);background:var(--paper2)}
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:1700;background:var(--ink);color:var(--paper2);padding:8px 14px;border-radius:999px;font-size:13.5px;display:none}
 
 /* 手機：面板改為底部抽屜 */
@@ -245,7 +248,8 @@ body.has-marquee{--mq:30px}
     </div>
     <div class="tbtns">
       <button class="tbtn primary" id="tourBtn" type="button">🧭<span class="tx"> 看懂導覽</span></button>
-      <a class="tbtn" href="manual.html" target="_blank" rel="noopener">📖<span class="tx"> 說明</span></a>
+      <a class="tbtn" href="manual.html" target="_blank" rel="noopener">📖<span class="tx"> 操作手冊</span></a>
+      <button class="tbtn" id="aboutBtn" type="button" aria-haspopup="dialog">ℹ<span class="tx"> 關於</span></button>
       <button class="tbtn" id="settingsBtn" type="button" aria-haspopup="dialog">⚙<span class="tx"> 常用設定</span></button>
       <button class="tbtn" id="installBtn" type="button">📲<span class="tx"> 安裝</span></button>
     </div>
@@ -282,7 +286,7 @@ body.has-marquee{--mq:30px}
   <div class="pfoot">
     <img src="https://visitor-badge.laobi.icu/badge?page_id=m255525.worldeconomyglobe" alt="訪客次數" height="20">
     <span>創作者 <a href="manual.html#creator" target="_blank" rel="noopener">Mark Tsai（蔡豐全）</a></span>
-    <span>數據為近似參考值</span>
+    <button class="linkbtn" type="button" data-open-about style="padding:0;font-size:12px">⚠ 使用警語</button>
   </div>
 </aside>
 
@@ -313,7 +317,41 @@ body.has-marquee{--mq:30px}
     <div class="srow"><span>金額幣別</span><select id="sCur"><option value="USD">美元</option><option value="TWD">新台幣（依當年平均匯率換算）</option></select></div>
     <div class="srow"><span>外觀</span><select id="sTheme"><option value="auto">跟隨系統</option><option value="light">亮色</option><option value="dark">暗色（太空）</option></select></div>
     <div class="srow"><span>減少動畫</span><div class="inl"><label><input type="checkbox" id="sReduce"> 關閉旋轉、粒子流動與鏡頭飛行</label></div></div>
+    <div class="sect" style="margin-top:14px">關於本工具</div>
+    <div class="chips">
+      <a class="sbtn" href="manual.html" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">📖 操作手冊</a>
+      <button class="sbtn" type="button" data-open-about>⚠ 使用警語</button>
+      <button class="sbtn" type="button" data-open-about="creator">👤 創作者資訊</button>
+      <button class="sbtn" type="button" data-install>📲 加入主畫面</button>
+    </div>
+    <p class="note" style="display:flex;align-items:center;gap:8px">訪客數 <img src="https://visitor-badge.laobi.icu/badge?page_id=m255525.worldeconomyglobe" alt="訪客次數" height="20"></p>
     <div class="sfoot"><span class="msg" id="setMsg"></span><button class="sbtn" id="setReset" type="button">恢復預設</button><button class="sbtn primary" id="setDone" type="button">完成</button></div>
+  </div>
+</div>
+
+<div class="modal" id="about" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+  <div class="card">
+    <h2 id="aboutTitle">ℹ 關於世界經濟 3D 地圖 <button class="xbtn" id="aboutClose" type="button" aria-label="關閉">✕</button></h2>
+    <p class="sub">用 3D 地球看懂各國經濟規模、生活水準、成長與貿易。<a href="manual.html" target="_blank" rel="noopener">📖 操作手冊</a></p>
+    <div class="sect">⚠ 使用警語</div>
+    <ul class="warn">
+      <li>經濟數據為依 IMF《世界經濟展望》、世界銀行等公開資料整理的<b>近似參考值</b>，四捨五入且各國統計口徑不一，<b>不是即時官方數據</b>；正式報告、教學引用或投資決策請查證原始資料。</li>
+      <li>本工具僅供理解經濟概念，<b>不構成任何投資、理財或商業建議</b>。</li>
+      <li>貿易夥伴為一般性的前三大貿易對象，弧線只表示關係，不代表金額大小。</li>
+      <li>國界使用 Natural Earth 1:110m 簡化地圖，僅供示意；地圖上的國界、名稱與區域分類不代表任何政治立場。</li>
+      <li>你的設定只存在這台裝置的瀏覽器，不會上傳。</li>
+      <li>僅供教學、課程及個人使用，禁止未經授權公開發布、販售或商業化使用。</li>
+    </ul>
+    <div class="creator-box" id="creatorBox">
+      <p style="margin:0"><strong>創作者：Mark Tsai（蔡豐全）</strong></p>
+      <p style="margin:4px 0">勞動力發展署創業顧問（2017 起）、經濟部 SBIR 海選專案評審委員（2019－2024），長期擔任小型企業人力提升計畫顧問與多項政府計畫業師、評審委員；專長銷售數據分析、AI 工具運用、政府補助計畫申請、創業與跨境電商。</p>
+      <p style="margin:0"><a href="manual.html#creator" target="_blank" rel="noopener">完整經歷與證照</a>｜<a href="mailto:tsaimark@gmail.com">tsaimark@gmail.com</a></p>
+    </div>
+    <div class="sfoot">
+      <span class="note" style="margin:0 auto 0 0;display:flex;align-items:center;gap:6px">訪客數 <img src="https://visitor-badge.laobi.icu/badge?page_id=m255525.worldeconomyglobe" alt="訪客次數" height="20"></span>
+      <button class="sbtn" type="button" data-install>📲 加入主畫面</button>
+      <button class="sbtn primary" id="aboutOk" type="button">我知道了</button>
+    </div>
   </div>
 </div>
 

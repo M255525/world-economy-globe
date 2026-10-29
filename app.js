@@ -375,6 +375,28 @@
       toast('已恢復預設設定');
     };
   }
+  function openAbout(part) {
+    if ($('settings').classList.contains('show')) $('settings').classList.remove('show');
+    $('about').classList.add('show');
+    if (part === 'creator') $('creatorBox').scrollIntoView({ block: 'nearest' });
+    $('aboutOk').focus();
+  }
+  function closeAbout() {
+    $('about').classList.remove('show');
+    try { localStorage.setItem('worldEconWarnSeen', '1'); } catch (e) {}
+  }
+  function bindAbout() {
+    $('aboutBtn').onclick = function () { openAbout(); };
+    $('aboutClose').onclick = $('aboutOk').onclick = closeAbout;
+    $('about').addEventListener('click', function (e) { if (e.target === this) closeAbout(); });
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('[data-open-about]'); if (a) { openAbout(a.dataset.openAbout); return; }
+      if (e.target.closest('[data-install]')) $('installBtn').click();
+    });
+    var seen = null;
+    try { seen = localStorage.getItem('worldEconWarnSeen'); } catch (e) {}
+    if (!seen) openAbout();
+  }
   function openSettings() { syncSettings(); $('settings').classList.add('show'); $('sInd').focus(); }
   function closeSettings() { $('settings').classList.remove('show'); $('settingsBtn').focus(); }
 
@@ -404,7 +426,7 @@
 
   /* ---------- 啟動 ---------- */
   function init() {
-    buildControls(); fillSettings(); bindPanel(); bindSettings();
+    buildControls(); fillSettings(); bindPanel(); bindSettings(); bindAbout();
     if (prefs.theme !== 'auto') document.documentElement.setAttribute('data-theme', prefs.theme);
     syncControls(); renderLegend(); renderPanel(); layout();
     $('tourBtn').onclick = function () { runTour(0); };
@@ -414,7 +436,8 @@
     document.addEventListener('keydown', function (e) {
       if (e.target.matches && e.target.matches('input,select,textarea')) return;
       if (e.key === 'Escape') {
-        if ($('settings').classList.contains('show')) closeSettings();
+        if ($('about').classList.contains('show')) closeAbout();
+        else if ($('settings').classList.contains('show')) closeSettings();
         else if (state.tour >= 0) endTour();
         else if (state.sel) select(null);
       } else if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
@@ -451,7 +474,7 @@
     state: state, prefs: function () { return prefs; },
     setIndicator: setIndicator, setYear: setYear, setView: setView, setRegion: function (r) { $('regionSel').value = r; $('regionSel').dispatchEvent(new Event('change')); },
     selectCountry: function (iso) { select(iso, true); }, runTour: runTour, endTour: endTour,
-    openSettings: openSettings, closeSettings: closeSettings, scene: GS
+    openSettings: openSettings, closeSettings: closeSettings, openAbout: openAbout, closeAbout: closeAbout, scene: GS
   };
   init();
 })();
