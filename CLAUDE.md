@@ -1,9 +1,9 @@
 # CLAUDE.md — world-economy-globe（世界經濟 3D 地圖）
 
-用 3D 地球／平面世界地圖看懂世界經濟：61 個主要經濟體 × 8 項指標（GDP、人均 GDP、成長率、人口、通膨、出口、出口依存度、失業率）× 2015／2020／2024。國家依指標分級上色、首都長出立體柱、金色弧線為主要貿易夥伴；右側排行榜／國家卡（白話解說、八項指標、和台灣比、貿易夥伴）；「🧭 看懂導覽」6 個主題故事。無框架、無建置。2026-10-29 建立。
+用 3D 地球／平面世界地圖看懂世界經濟：61 個主要經濟體 × 8 項指標（GDP、人均 GDP、成長率、人口、通膨、出口、出口依存度、失業率）× 2015–2024 逐年（2026-10-31 由三個年度擴充為十年）。國家依指標分級上色、首都長出立體柱、金色弧線為主要貿易夥伴；右側排行榜／國家卡（白話解說、八項指標、和台灣比、貿易夥伴）；「🧭 看懂導覽」6 個主題故事。無框架、無建置。2026-10-29 建立。
 
 ## 檔案
-- `data.js`：`window.WE`。`RAW` 每國 `[iso3, 地圖數字代碼, 中文名, 區域, 首都緯度, 經度, 三年度[GDP十億美元, 人口百萬, 成長%, 通膨%, 出口十億美元, 失業%], 前三大貿易夥伴]`；`gdppc`、`expShare` 由程式算。`INDICATORS` 的 `bins` 是**固定**分級門檻（跨年度可比）。`TOURS` 文字裡的數字是手寫的，**改資料要同步檢查導覽文案**。數值是近似參考值，頁面／manual 都有警語。
+- `data.js`：`window.WE`。`RAW` 每國 `[iso3, 地圖數字代碼, 中文名, 區域, 首都緯度, 經度, 十個年度[GDP十億美元, 人口百萬, 成長%, 通膨%, 出口十億美元, 失業%], 前三大貿易夥伴]`；`gdppc`、`expShare` 由程式算。`INDICATORS` 的 `bins` 是**固定**分級門檻（跨年度可比）。2015／2020／2024 是手寫錨點，中間 7 年用世界銀行 WDI 序列補齊並對齊錨點（金額類依錨點比例對數內插校正；比率類只在錨點差距 ≤2 個百分點時加位移，否則直接用 WDI）；台灣、PAK 通膨（會計年度）、PHL／MAR 失業、NGA 出口、ARG 2016–17 通膨、UKR 2022–23 失業是手補。`TOURS` 文字裡的數字是手寫的，**改資料要同步檢查導覽文案**。數值是近似參考值，頁面／manual 都有警語。
 - `scene.js`：`window.GlobeScene`。Three.js 0.160（importmap → jsdelivr）；**地球與平面共用同一張 PlaneGeometry，在 vertex shader 用 `uMorph` 變形**，長條／弧線／標籤用 CPU 端 `posAt(lon,lat,h,morph)` 跟著變形。國家上色畫在 2D canvas（等距圓柱投影）當貼圖；點選用射線打球面／平面算經緯度再做 point-in-polygon（不靠 Three raycast 打變形後的網格）。
 - `app.js`：介面狀態；測試 hook `window.__worldEcon`（`state/prefs/setIndicator/setYear/setView/setRegion/selectCountry/runTour/endTour/openSettings/scene`），`GlobeScene.stats()` 看長條／弧線／標籤數。
 - `vendor/countries-110m.json`（world-atlas@2.0.2，ISC／Natural Earth 公有領域）＋`vendor/topojson-client.min.js`（3.1.0）放本地，PWA 離線也有國界。新加坡、香港在 110m 沒有輪廓，只有立體柱。

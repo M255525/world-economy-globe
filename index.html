@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>世界經濟 3D 地圖</title>
-<meta name="description" content="用 3D 地球與平面地圖看懂世界經濟：GDP、人均 GDP、成長率、通膨、出口、失業率，跨 2015／2020／2024 比較，附導覽與貿易夥伴弧線。">
+<meta name="description" content="用 3D 地球與平面地圖看懂世界經濟：GDP、人均 GDP、成長率、通膨、出口、失業率，可逐年比較 2015–2024，附導覽與貿易夥伴弧線。">
 <meta name="theme-color" content="#0d1b36">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icons/icon-192.png">
@@ -73,10 +73,11 @@ body.has-marquee{--mq:30px}
 :root[data-theme="dark"] .ind[aria-pressed="true"]{background:var(--accent);color:#fff}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ind[aria-pressed="true"]{background:var(--accent);color:#fff}}
 .years{display:flex;align-items:center;gap:8px;padding:5px 10px}
-.years input[type=range]{width:120px;accent-color:var(--accent)}
-.ytick{display:flex;gap:2px}
+.years input[type=range]{width:150px;accent-color:var(--accent)}
+.ytick{display:flex;align-items:center;gap:2px}
 .ytick button{border:0;background:var(--chip);border-radius:8px;padding:4px 8px;font-size:13px;font-weight:700;color:var(--ink2)}
-.ytick button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.ytick button:disabled{opacity:.35}
+.ytick b{min-width:44px;text-align:center;font-size:15px;font-variant-numeric:tabular-nums}
 .iconbtn{border:0;background:var(--chip);border-radius:50%;width:30px;height:30px;font-size:13px;display:inline-flex;align-items:center;justify-content:center;flex:none}
 .misc{display:flex;gap:6px;padding:5px;align-items:center}
 .misc select{border:1px solid var(--line);background:var(--paper2);border-radius:10px;padding:5px 8px;font-size:13px;max-width:150px}
@@ -142,7 +143,7 @@ body.has-marquee{--mq:30px}
 .xbtn{margin-left:auto;border:0;background:var(--chip);border-radius:50%;width:30px;height:30px;flex:none}
 .big{margin:10px 0 2px;font-size:28px;font-weight:900;font-variant-numeric:tabular-nums}
 .big small{display:block;font-size:13px;color:var(--ink2);font-weight:700;margin-top:2px}
-.trend{display:flex;gap:8px;align-items:flex-end;height:72px;margin:8px 0 4px;padding:0 2px}
+.trend{display:flex;gap:3px;align-items:flex-end;height:72px;margin:8px 0 4px;padding:0 2px}
 .trend button{flex:1;border:0;background:none;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:3px;padding:0;font-size:11.5px;color:var(--ink2);font-variant-numeric:tabular-nums}
 .trend button i{display:block;width:100%;max-width:56px;border-radius:6px 6px 2px 2px;min-height:3px}
 .trend button[aria-pressed="true"]{color:var(--ink);font-weight:900}
@@ -259,7 +260,7 @@ body.has-marquee{--mq:30px}
     <div class="row2">
       <div class="card years">
         <button class="iconbtn" id="playBtn" type="button" title="自動播放年份" aria-label="自動播放年份">▶</button>
-        <input type="range" id="yearRange" min="0" max="2" step="1" aria-label="年份">
+        <input type="range" id="yearRange" min="0" max="9" step="1" aria-label="年份">
         <div class="ytick" id="yearBtns"></div>
       </div>
       <div class="card misc">

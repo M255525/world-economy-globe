@@ -106,8 +106,9 @@
       return '<button class="ind" type="button" data-ind="' + k + '" title="' + esc(WE.INDICATORS[k].desc) + '">' + esc(WE.INDICATORS[k].name) + '</button>';
     }).join('');
     $('inds').addEventListener('click', function (e) { var b = e.target.closest('[data-ind]'); if (b) setIndicator(b.dataset.ind); });
-    $('yearBtns').innerHTML = WE.YEARS.map(function (y) { return '<button type="button" data-year="' + y + '">' + y + '</button>'; }).join('');
-    $('yearBtns').addEventListener('click', function (e) { var b = e.target.closest('[data-year]'); if (b) { stopPlay(); setYear(+b.dataset.year); } });
+    $('yearBtns').innerHTML = '<button type="button" data-step="-1" aria-label="上一年">‹</button><b id="yearLbl" aria-live="polite"></b><button type="button" data-step="1" aria-label="下一年">›</button>';
+    $('yearBtns').addEventListener('click', function (e) { var b = e.target.closest('[data-step]'); if (b) { stopPlay(); stepYear(+b.dataset.step); } });
+    $('yearRange').max = WE.YEARS.length - 1;
     $('yearRange').addEventListener('input', function () { stopPlay(); setYear(WE.YEARS[+this.value]); });
     $('playBtn').addEventListener('click', function () { state.playing ? stopPlay() : startPlay(); });
     var rs = $('regionSel');
@@ -118,8 +119,10 @@
   }
   function syncControls() {
     document.querySelectorAll('.ind').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.ind === state.ind); });
-    document.querySelectorAll('#yearBtns button').forEach(function (b) { b.setAttribute('aria-pressed', +b.dataset.year === state.year); });
-    $('yearRange').value = WE.YEARS.indexOf(state.year);
+    var yi = WE.YEARS.indexOf(state.year);
+    $('yearLbl').textContent = state.year;
+    document.querySelectorAll('#yearBtns [data-step]').forEach(function (b) { var j = yi + +b.dataset.step; b.disabled = j < 0 || j >= WE.YEARS.length; });
+    $('yearRange').value = yi;
     var v = GS.ready ? GS.getView() : prefs.view;
     document.querySelectorAll('[data-view]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.view === v); });
     $('playBtn').textContent = state.playing ? '❚❚' : '▶';
@@ -135,6 +138,10 @@
     if (WE.YEARS.indexOf(y) < 0) return;
     state.year = y; refreshScene(); renderLegend(); renderPanel(); syncControls();
   }
+  function stepYear(d) {
+    var i = WE.YEARS.indexOf(state.year) + d;
+    if (i >= 0 && i < WE.YEARS.length) setYear(WE.YEARS[i]);
+  }
   function setView(v) {
     var c = state.sel && WE.BY_ISO[state.sel];
     GS.setView(v, c ? { lon: c.lon, lat: c.lat } : null);
@@ -143,7 +150,7 @@
   function startPlay() {
     state.playing = setInterval(function () {
       var i = (WE.YEARS.indexOf(state.year) + 1) % WE.YEARS.length; setYear(WE.YEARS[i]);
-    }, 2200);
+    }, 1500);
     var i0 = (WE.YEARS.indexOf(state.year) + 1) % WE.YEARS.length; setYear(WE.YEARS[i0]);
   }
   function stopPlay() { if (state.playing) { clearInterval(state.playing); state.playing = null; syncControls(); } }
@@ -240,7 +247,7 @@
     var vals = WE.YEARS.map(function (y) { return WE.value(c, state.ind, y); });
     var vm = Math.max.apply(null, vals.map(Math.abs)) || 1;
     html += '<div class="trend">' + WE.YEARS.map(function (y, i) {
-      return '<button type="button" data-y="' + y + '" aria-pressed="' + (y === state.year) + '"><span>' + esc(fmt(state.ind, vals[i], y)) + '</span><i style="height:' + Math.max(4, Math.abs(vals[i]) / vm * 44).toFixed(0) + 'px;background:' + WE.colorFor(state.ind, vals[i]) + '"></i><span>' + y + '</span></button>';
+      return '<button type="button" data-y="' + y + '" aria-pressed="' + (y === state.year) + '" title="' + y + '：' + esc(fmt(state.ind, vals[i], y)) + '"><i style="height:' + Math.max(4, Math.abs(vals[i]) / vm * 44).toFixed(0) + 'px;background:' + WE.colorFor(state.ind, vals[i]) + '"></i><span>' + String(y).slice(2) + '</span></button>';
     }).join('') + '</div>';
     html += '<div class="explain">' + esc(explain(c, state.ind, state.year)) + '</div>';
     html += '<div class="sect">八項指標（' + state.year + '，點一列切換）</div><table class="ctable"><tbody>' + WE.IND_ORDER.map(function (k) {
@@ -442,8 +449,7 @@
         else if (state.sel) select(null);
       } else if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
         if ($('settings').classList.contains('show')) return;
-        var i = WE.YEARS.indexOf(state.year) + (e.key === 'ArrowRight' ? 1 : -1);
-        if (i >= 0 && i < WE.YEARS.length) { stopPlay(); setYear(WE.YEARS[i]); }
+        stopPlay(); stepYear(e.key === 'ArrowRight' ? 1 : -1);
       }
     });
     addEventListener('resize', layout);
