@@ -171,8 +171,10 @@
     labs.push('≥ ' + bl(b[b.length - 1]));
     var w = WE.WORLD[state.year][state.ind];
     $('legend').className = 'card' + (legendMin ? ' min' : '');
-    $('legend').innerHTML = '<h3>' + esc(d.name) + '・' + state.year + ' <button class="lgtog" id="lgTog" type="button">' + (legendMin ? '展開 ▴' : '收合 ▾') + '</button></h3>' +
-      '<p>' + esc(d.desc) + (w != null ? '　全球' + (d.kind === 'total' || d.kind === 'people' ? '合計' : '平均') + '約 <b>' + esc(fmt(state.ind, w)) + '</b>' : '') + '</p>' +
+    var filled = WE.ANCHOR_YEARS.indexOf(state.year) < 0;
+    $('legend').innerHTML = '<h3>' + esc(d.name) + '・' + state.year + (filled ? '＊' : '') + ' <button class="lgtog" id="lgTog" type="button">' + (legendMin ? '展開 ▴' : '收合 ▾') + '</button></h3>' +
+      '<p>' + esc(d.desc) + (w != null ? '　全球' + (d.kind === 'total' || d.kind === 'people' ? '合計' : '平均') + '約 <b>' + esc(fmt(state.ind, w)) + '</b>' + (state.ind === 'infl' ? '（IMF 口徑' + (state.year === 2015 ? '不同，偏高' : '') + '）' : '') : '') + '</p>' +
+      (filled ? '<p class="fnote">＊補齊年份：依世界銀行年度資料對齊 2015／2020／2024 推估的近似值</p>' : '') +
       (d.money ? '<p style="margin-bottom:4px">單位：' + (prefs.currency === 'TWD' ? '新台幣' : '美元') + '</p>' : '') + '<div class="lg">' + d.pal.map(function (c, i) { return '<span><i style="background:' + c + '"></i>' + labs[i] + '</span>'; }).join('') +
       (mapNoData ? '' : '<span><i style="background:' + (isDark() ? '#2b3756' : '#dfe5ee') + '"></i>未收錄</span>') + '</div>';
     $('lgTog').onclick = function () { legendMin = !legendMin; renderLegend(); };
@@ -203,7 +205,7 @@
     if (twIdx >= lim) html += '<li class="rsep">⋯</li>' + rowHtml(rk[twIdx], twIdx, mx);
     html += '</ol>';
     if (rk.length > 15) html += '<button class="linkbtn" id="moreBtn" type="button">' + (state.showAll ? '只看前 15 名 ▴' : '顯示全部 ' + rk.length + ' 個 ▾') + '</button>';
-    html += '<p class="note">點任一列、地圖上的國家或立體柱，可看該國詳細資料與貿易夥伴。數值為依 IMF、世界銀行公開資料整理的近似參考值。</p>';
+    html += '<p class="note">點任一列、地圖上的國家或立體柱，可看該國詳細資料與貿易夥伴。數值為依 IMF、世界銀行公開資料整理的近似參考值；標＊的年份（2016–2019、2021–2023）為對齊補齊的推估值。</p>';
     $('pbody').innerHTML = html;
     if ($('moreBtn')) $('moreBtn').onclick = function () { state.showAll = !state.showAll; renderRanking(); };
   }

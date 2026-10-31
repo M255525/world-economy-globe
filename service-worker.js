@@ -1,5 +1,5 @@
 // 僅供「加入主畫面」安裝需求使用：network-first + 同源快取備援。
-const CACHE_NAME = 'world-econ-shell-v3';
+const CACHE_NAME = 'world-econ-shell-v4';
 const SHELL_FILES = [
   './',
   './index.html',
